@@ -1,7 +1,6 @@
 import {
   CognitoIdentityProviderClient,
   SignUpCommand,
-  InvalidPasswordException,
   CognitoIdentityProviderServiceException,
 } from "@aws-sdk/client-cognito-identity-provider";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -36,7 +35,7 @@ export default async function handler(
     const response = await cognitoClient.send(signUpCommand);
     return res
       .status(response["$metadata"].httpStatusCode!)
-      .send({ message: "Success" });
+      .send({ message: "User registration success" });
   } catch (err) {
     console.log(err);
     if (err instanceof CognitoIdentityProviderServiceException) {
